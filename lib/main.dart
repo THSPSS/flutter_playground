@@ -6,7 +6,11 @@ import 'home_page.dart';
 // Providers
 // Provider (object that provider widgets / read only widgets)
 // hot reload not work
-final nameProvider = Provider<String>((ref) => 'seon yeong');
+// changing value
+// final nameProvider = Provider<String>((ref) => 'seon yeong');
+
+//StateProvider / can changing value
+final nameProvider = StateProvider<String?>((ref) => null);
 
 void main() {
   runApp(
@@ -27,7 +31,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: HomePage(),
