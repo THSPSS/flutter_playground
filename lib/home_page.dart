@@ -55,7 +55,8 @@ class HomePage extends ConsumerWidget {
     // cannot change nameProvider value
 
     // read is one time thing only
-    final name = ref.read(nameProvider) ?? '';
+    // final name = ref.read(nameProvider) ?? '';
+    final name = ref.watch(nameProvider) ?? '';
     //final name = ref.read(nameProvider) != null ? ref.read(nameProvider) : '';
 
     return Scaffold(
