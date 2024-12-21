@@ -41,7 +41,15 @@ class HomePage extends ConsumerWidget {
   void onSubmit(WidgetRef ref, String value) {
     //can change value
     //current state
-    ref.read(nameProvider.notifier).update((state) => value);
+    // ref.read(nameProvider.notifier).update((state) => value);
+    ref.read(userProvider.notifier).updateName(value);
+  }
+
+  void onSubmitAge(WidgetRef ref, String ageValue) {
+    //can change value
+    //current state
+    // ref.read(nameProvider.notifier).update((state) => value);
+    ref.read(userProvider.notifier).updateAge(int.parse(ageValue));
   }
 
   // ConsumerWidget : name value changed and entire widget is rebuild
@@ -56,12 +64,15 @@ class HomePage extends ConsumerWidget {
 
     // read is one time thing only
     // final name = ref.read(nameProvider) ?? '';
-    final name = ref.watch(nameProvider) ?? '';
+    //watch is recommended than read
+    // final name = ref.watch(nameProvider) ?? '';
     //final name = ref.read(nameProvider) != null ? ref.read(nameProvider) : '';
+
+    final user = ref.watch(userProvider);
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(name),
+          title: Text(user.name),
         ),
         //example 2. using consumer
         // just change center widget that has name variable
@@ -72,8 +83,14 @@ class HomePage extends ConsumerWidget {
               //change nameProvider
               onSubmitted: (value) => onSubmit(ref, value),
             ),
+            TextField(
+              //change age
+              onSubmitted: (value) => onSubmitAge(ref, value),
+            ),
             Center(
-              child: Text(name),
+              child: Text(
+                user.age.toString(),
+              ),
             ),
           ],
         ));

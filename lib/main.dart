@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:playground/user_model.dart';
 
 import 'home_page.dart';
 
@@ -10,7 +11,16 @@ import 'home_page.dart';
 // final nameProvider = Provider<String>((ref) => 'seon yeong');
 
 //StateProvider / can changing value
-final nameProvider = StateProvider<String?>((ref) => null);
+// final nameProvider = StateProvider<String?>((ref) => null);
+
+//StateNotifier and StateNotifierProvider
+final userProvider =
+    StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier(
+          User(
+            name: '',
+            age: 0,
+          ),
+        ));
 
 void main() {
   runApp(
