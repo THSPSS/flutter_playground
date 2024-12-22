@@ -15,12 +15,7 @@ import 'home_page.dart';
 
 //StateNotifier and StateNotifierProvider
 final userProvider =
-    StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier(
-          User(
-            name: '',
-            age: 0,
-          ),
-        ));
+    StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier());
 
 void main() {
   runApp(

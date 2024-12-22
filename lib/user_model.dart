@@ -60,7 +60,10 @@ class User {
 //update user model
 class UserNotifier extends StateNotifier<User> {
   //constructor
-  UserNotifier(super.state);
+  UserNotifier() : super(const User(name: '', age: 0));
+  // {
+  //   updateName('ad');
+  // };
 
   void updateName(String value) {
     state = state.copyWith(name: value);
