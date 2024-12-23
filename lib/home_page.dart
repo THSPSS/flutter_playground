@@ -68,11 +68,14 @@ class HomePage extends ConsumerWidget {
     // final name = ref.watch(nameProvider) ?? '';
     //final name = ref.read(nameProvider) != null ? ref.read(nameProvider) : '';
 
-    final user = ref.watch(userProvider);
+    // final user = ref.watch(userProvider);
+
+    //only rerun the entire widget tree when class value has changed
+    final user = ref.watch(userProvider.select((value) => value.name));
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(user.name),
+          title: Text(user),
         ),
         //example 2. using consumer
         // just change center widget that has name variable
@@ -89,7 +92,7 @@ class HomePage extends ConsumerWidget {
             ),
             Center(
               child: Text(
-                user.age.toString(),
+                user.toString(),
               ),
             ),
           ],
