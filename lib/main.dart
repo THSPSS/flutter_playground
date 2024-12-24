@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playground/user_model.dart';
 
 import 'home_page.dart';
+import 'package:http/http.dart' as http;
 
 // Providers
 // Provider (object that provider widgets / read only widgets)
@@ -13,9 +14,20 @@ import 'home_page.dart';
 //StateProvider / can changing value
 // final nameProvider = StateProvider<String?>((ref) => null);
 
-//StateNotifier and StateNotifierProvider
-final userProvider =
-    StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier());
+//StateNotifier and StateNotifierProvider -> rec
+// final userProvider =
+//     StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier());
+
+//ChangeNotifierProvider -> mutable so it is not recommendeds
+// final userChangeNotifierProvider =
+//     ChangeNotifierProvider((ref) => UserNotifierChange());
+
+//FutureProvider > aysnc or firebase call , http call
+final fetchUserProvioder = FutureProvider((ref) {
+  const url = 'https://jsonplaceholder.typicode.com/users';
+
+  return http.get(Uri.parse(url)).then((value) => User.fromJson(value.body));
+});
 
 void main() {
   runApp(
