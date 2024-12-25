@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 @immutable
 class User {
@@ -82,5 +83,16 @@ class UserNotifierChange extends ChangeNotifier {
   void updateEmail(String value) {
     user = user.copyWith(email: value);
     notifyListeners();
+  }
+}
+
+final UserRepositoryProvider = Provider((ref) => UserRepository());
+
+class UserRepository {
+  Future<User> fetchUserData() {
+    const url = 'https://jsonplaceholder.typicode.com/users';
+    return http.get(Uri.parse(url)).then(
+          (value) => User.fromJson(value.body),
+        );
   }
 }

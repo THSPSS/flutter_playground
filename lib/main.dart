@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playground/user_model.dart';
 
 import 'home_page.dart';
-import 'package:http/http.dart' as http;
 
 // Providers
 // Provider (object that provider widgets / read only widgets)
@@ -24,10 +23,18 @@ import 'package:http/http.dart' as http;
 
 //FutureProvider > aysnc or firebase call , http call
 final fetchUserProvioder = FutureProvider((ref) {
-  const url = 'https://jsonplaceholder.typicode.com/users';
-
-  return http.get(Uri.parse(url)).then((value) => User.fromJson(value.body));
+  final userRepository = ref.watch(UserRepositoryProvider);
+  return userRepository.fetchUserData();
 });
+
+//StreamProvider
+final streamProvider = StreamProvider(
+  // _firebaseFiresotre.collection('users').doc(userId).snapshots();
+  (ref) async* {
+    //all the possible value that updated and changing
+    yield [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  },
+);
 
 void main() {
   runApp(
