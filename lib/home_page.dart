@@ -81,73 +81,73 @@ class HomePage extends ConsumerWidget {
     // final age = ref.watch(userProvider.select((value) => value.age));
 
     //asyncValue
-    // return ref.watch(fetchUserProvioder).when(
-    //   data: (data) {
-    //     return Scaffold(
-    //         appBar: AppBar(
-    //           title: Text(data.name),
-    //         ),
-    //         //example 2. using consumer
-    //         // just change center widget that has name variable
-    //         // there is no unnecessary rebuld
-    //         body: Column(
-    //           children: [
-    //             TextField(
-    //                 //change nameProvider
-    //                 // onSubmitted: (value) => onSubmit(ref, value),
-    //                 ),
-    //             TextField(
-    //                 //change age
-    //                 // onSubmitted: (value) => onSubmitAge(ref, value),
-    //                 ),
-    //             Center(
-    //               child: Text(
-    //                 data.email,
-    //               ),
-    //             ),
-    //           ],
-    //         ));
-    //   },
-    //   error: (error, stackTrace) {
-    //     return Scaffold(
-    //       body: Center(
-    //         child: Text(
-    //           error.toString(),
-    //         ),
-    //       ),
-    //     );
-    //   },
-    //   loading: () {
-    //     return const Center(
-    //       child: CircularProgressIndicator(),
-    //     );
-    //   },
-    // );
-
-    //streamProvider
-    return Scaffold(
-      body: ref.watch(streamProvider).when(
-        data: (data) {
-          return Center(
-            child: Text(
-              //[1,2,3,4,5,6,7,8,9,10]
-              data.toString(),
+    return ref.watch(fetchUserProvioder).when(
+      data: (data) {
+        return Scaffold(
+            appBar: AppBar(
+              title: Text(data.name),
             ),
-          );
-        },
-        error: (error, stackTrace) {
-          return Center(
+            //example 2. using consumer
+            // just change center widget that has name variable
+            // there is no unnecessary rebuld
+            body: Column(
+              children: [
+                TextField(
+                    //change nameProvider
+                    // onSubmitted: (value) => onSubmit(ref, value),
+                    ),
+                TextField(
+                    //change age
+                    // onSubmitted: (value) => onSubmitAge(ref, value),
+                    ),
+                Center(
+                  child: Text(
+                    data.email,
+                  ),
+                ),
+              ],
+            ));
+      },
+      error: (error, stackTrace) {
+        return Scaffold(
+          body: Center(
             child: Text(
               error.toString(),
             ),
-          );
-        },
-        loading: () {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
+          ),
+        );
+      },
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
+
+    //streamProvider
+    // return Scaffold(
+    //   body: ref.watch(streamProvider).when(
+    //     data: (data) {
+    //       return Center(
+    //         child: Text(
+    //           //[1,2,3,4,5,6,7,8,9,10]
+    //           data.toString(),
+    //         ),
+    //       );
+    //     },
+    //     error: (error, stackTrace) {
+    //       return Center(
+    //         child: Text(
+    //           error.toString(),
+    //         ),
+    //       );
+    //     },
+    //     loading: () {
+    //       return const Center(
+    //         child: CircularProgressIndicator(),
+    //       );
+    //     },
+    //   ),
+    // );
   }
 }
