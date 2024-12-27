@@ -4,30 +4,29 @@ import 'package:playground/user_model.dart';
 
 import 'home_page.dart';
 
-// Providers
-// Provider (object that provider widgets / read only widgets)
-// hot reload not work
-// changing value
+// <Providers>
+//1. Provider (object that provider widgets / read only widgets)
+// hot reload not work changing value
 // final nameProvider = Provider<String>((ref) => 'seon yeong');
 
-//StateProvider / can changing value
+//2. StateProvider / can changing value
 // final nameProvider = StateProvider<String?>((ref) => null);
 
-//StateNotifier and StateNotifierProvider -> rec
+//3. StateNotifier and StateNotifierProvider -> rec
 // final userProvider =
 //     StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier());
 
-//ChangeNotifierProvider -> mutable so it is not recommendeds
+//4. ChangeNotifierProvider -> mutable so it is not recommendeds
 // final userChangeNotifierProvider =
 //     ChangeNotifierProvider((ref) => UserNotifierChange());
 
-//FutureProvider > aysnc or firebase call , http call
-final fetchUserProvioder = FutureProvider((ref) {
-  final userRepository = ref.watch(UserRepositoryProvider);
-  return userRepository.fetchUserData();
-});
+//5. FutureProvider > aysnc or firebase call , http call
+// final fetchUserProvioder = FutureProvider((ref) {
+//   final userRepository = ref.watch(UserRepositoryProvider);
+//   return userRepository.fetchUserData();
+// });
 
-//StreamProvider
+//6. StreamProvider
 final streamProvider = StreamProvider(
   // _firebaseFiresotre.collection('users').doc(userId).snapshots();
   (ref) async* {
@@ -35,6 +34,12 @@ final streamProvider = StreamProvider(
     yield [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   },
 );
+
+//7. family
+final fetchUserProvioder = FutureProvider.family((ref) {
+  final userRepository = ref.watch(UserRepositoryProvider);
+  return userRepository.fetchUserData();
+});
 
 void main() {
   runApp(
