@@ -43,6 +43,7 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
+  int userNo = 1;
   @override
   Widget build(BuildContext context) {
     return ref.watch(fetchUserProvioder).when(

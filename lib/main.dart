@@ -37,8 +37,8 @@ final streamProvider = StreamProvider(
 
 //7. family
 final fetchUserProvioder = FutureProvider.family((ref) {
-  final userRepository = ref.watch(UserRepositoryProvider);
-  return userRepository.fetchUserData();
+  final userRepository = ref.watch(userRepositoryProvider);
+  return userRepository.fetchUserData(1);
 });
 
 void main() {
