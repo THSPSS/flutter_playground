@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'user_model.g.dart';
 
 @immutable
 class User {
@@ -86,10 +89,22 @@ class UserNotifierChange extends ChangeNotifier {
   }
 }
 
-final userRepositoryProvider = Provider((ref) => UserRepository());
+@riverpod
+UserRepository userRepository(UserRepositoryRef ref) {
+  return UserRepository(ref);
+}
+
+// final userRepositoryProvider =
+//     Provider.autoDispose((ref) => UserRepository(ref));
 
 class UserRepository {
-  Future<User> fetchUserData(int input) {
+  //check loading
+  // UserRepository() : super(false);
+  // final TextEditingController controller = TextEditingController();
+
+  final Ref ref;
+  UserRepository(this.ref);
+  Future<User> fetchUserData(String input) {
     var url = 'https://jsonplaceholder.typicode.com/users/$input';
     return http.get(Uri.parse(url)).then(
           (value) => User.fromJson(value.body),
